@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>代理模式-图片懒加载</title>
+</head>
+<body>
+
+    <script>
+        var myImage = (function () {
+            var imgNode = document.createElement('img');
+
+            document.body.appendChild(imgNode);
+
+            return {
+                setSrc: function (src) {
+                    imgNode.src = src;
+                }
+            }
+        })();
+
+        var proxyImage = (function () {
+            var img = new Image();
+            img.onload = function () {
+                myImage.setSrc(this.src);
+            };
+
+            return {
+                setSrc: function (src) {
+                    myImage.setSrc('./loading.jpg');
+                    img.src = src;
+                }
+            }
+        })();
+
+        proxyImage.setSrc('https://migong.oss-cn-hangzhou.aliyuncs.com/thumb/4e8db455-a269-45d4-b006-09e7fb41654e.png?x-oss-process=image/quality,q_50')
+
+    </script>
+
+</body>
+</html>
