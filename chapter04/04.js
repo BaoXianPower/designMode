@@ -24,9 +24,9 @@ function test1() {
     var a = Singleton.queryInstance('a');
     var b = Singleton.queryInstance('b');
 
-    console.log(a);
-    console.log(b);
-    console.log(a === b);
+    console.log(a);  // {name: 'a', instance: null}
+    console.log(b);  // {name: 'a', instance: null}
+    console.log(a === b);  // true
 
 }
 // test1();
@@ -64,7 +64,7 @@ function test2() {
     console.log(b);
     console.log(a === b);
 }
-// test2();
+test2();
 
 /**
  * 使用代理实现单例模式
@@ -74,15 +74,11 @@ function test3() {
         this.html = html;
         this.init();
     }
-
     CreateDiv.prototype.init = function () {
         var div = document.createElement('div');
-
         div.innerHTML = this.html;
-
         document.body.appendChild(div);
     }
-
     // 将负责管理单例的逻辑移到了代理类中.
     // 这样CreateDiv 就变成了一个普通的类
     var ProxySingletonCreateDiv = (function () {
@@ -135,4 +131,4 @@ function test4() {
         loginLayer.style.display = 'block';
     }
 }
-test4();
+// test4();
